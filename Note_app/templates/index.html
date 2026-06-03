@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Note App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to my Note App</h1>
+        <form action="/add" method="post">
+            <input type="text" name="Work_type" placeholder="Eg-> Home Work" required>
+            <input type="date" name="creation" placeholder="Eg=> 26/05/1999" required>
+            <textarea name="Content" placeholder="Eg-> 2 program of C++" required></textarea>
+            <button type="submit">Click to add Note</button>
+        </form>
+        <hr> 
+        <div class="note-cointainer">
+        {% for note in notes %}
+        <div class="note-card" >
+            <h2>{{note[1]}}</h2>
+            <p>{{note[2]}}</p>
+            <form action="/delete/{{note[0]}}" method="post">
+            <button type="submit">Delete</button>
+            </form>
+            
+        </div>
+                {% endfor %}
+        </div>
+
+    </div>
+    
+</body>
+</html>
