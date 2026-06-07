@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Page</title>
+    <link rel="stylesheet" href="/static/style.css"
+</head>
+<body>
+    <h1>Added Note here </h1>
+    {% if error % }
+    <p style="color: red;">{{error}}</p>
+    {% else %}
+    <p><b>ID:</b>{{note[0]}}</p>
+    <p></p>
+    <a href ="/detail"
+    {% endif %}
+</body>
+</html>
