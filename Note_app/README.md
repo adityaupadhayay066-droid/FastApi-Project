@@ -1,6 +1,6 @@
 # 📝 Note App
 
-A simple full-stack note-taking web app built with **FastAPI**, **Jinja2 templates**, and **MySQL** — with a clean Notion-inspired dark UI.
+A simple Note-taking web app built with **FastAPI**, **Jinja2 templates**, and **MySQL** — with a clean Notion-inspired dark UI.
 
 ---
 
