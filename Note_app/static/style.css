@@ -1,259 +1,376 @@
-/* =========================
-   GOOGLE / NOTION STYLE UI
-========================= */
-
-/* RESET */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ==========================================================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* BODY */
-body{
+body {
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:#191919;
-    color:#ffffff;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:50px 20px;
-    line-height:1.6;
+    background: #191919;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    line-height: 1.6;
 }
 
-/* MAIN CONTAINER */
-.container{
-    width:100%;
-    max-width:720px;
+/* MAIN CONTAINER (Used on both pages) */
+.container {
+    width: 100%;
+    max-width: 720px;
 }
 
-/* TITLE */
-h1{
-    font-size:42px;
-    font-weight:700;
-    margin-bottom:35px;
-    color:#ffffff;
-    letter-spacing:-1px;
+/* TYPOGRAPHY */
+h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 35px;
+    color: #ffffff;
+    letter-spacing: -1px;
 }
 
-/* FORM */
-form{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+hr {
+    border: none;
+    height: 1px;
+    background: #2c2c2c;
+    margin: 35px 0;
 }
 
-/* INPUTS */
+/* ==========================================================================
+   2. DASHBOARD FORM & INPUTS (index.html)
+   ========================================================================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 input[type="text"],
 input[type="date"],
-textarea{
-    width:100%;
-    background:#202020;
-    border:1px solid #2f2f2f;
-    color:#f5f5f5;
-    border-radius:12px;
-    padding:15px 16px;
-    font-size:15px;
-    outline:none;
-    transition:all 0.2s ease;
+textarea {
+    width: 100%;
+    background: #202020;
+    border: 1px solid #2f2f2f;
+    color: #f5f5f5;
+    border-radius: 12px;
+    padding: 15px 16px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
 }
 
-/* PLACEHOLDER */
 input::placeholder,
-textarea::placeholder{
-    color:#7d7d7d;
+textarea::placeholder {
+    color: #7d7d7d;
 }
 
-/* FOCUS */
 input[type="text"]:focus,
 input[type="date"]:focus,
-textarea:focus{
-    border-color:#2f80ff;
-    background:#252525;
-    box-shadow:0 0 0 3px rgba(47,128,255,0.15);
+textarea:focus {
+    border-color: #2f80ff;
+    background: #252525;
+    box-shadow: 0 0 0 3px rgba(47, 128, 255, 0.15);
 }
 
-/* TEXTAREA */
-textarea{
-    min-height:120px;
-    resize:vertical;
+textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
-/* DATE INPUT */
-input[type="date"]{
-    cursor:pointer;
+input[type="date"] {
+    cursor: pointer;
 }
 
-/* CALENDAR ICON */
-input[type="date"]::-webkit-calendar-picker-indicator{
-    filter:invert(1);
-    opacity:0.7;
-    cursor:pointer;
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.7;
+    cursor: pointer;
 }
 
-/* SUBMIT BUTTON */
-form button[type="submit"]{
-    background:#2f80ff;
-    color:white;
-    border:none;
-    border-radius:12px;
-    padding:14px;
-    font-size:15px;
-    font-weight:600;
-    cursor:pointer;
-    transition:all 0.2s ease;
+/* MAIN APP CREATION BUTTON */
+form button[type="submit"] {
+    background: #2f80ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-/* BUTTON HOVER */
-form button[type="submit"]:hover{
-    background:#1f6feb;
-    transform:translateY(-1px);
+form button[type="submit"]:hover {
+    background: #1f6feb;
+    transform: translateY(-1px);
 }
 
-/* SEND ICON */
-form button[type="submit"]::after{
-    content:"";
-    width:45px;
-    height:40px;
-
-    background-image:url('/static/send.png');
-    background-size:contain;
-    background-repeat:no-repeat;
-
-    filter:brightness(0) invert(1);
+/* SEND ICON FOR CREATION BUTTON */
+form button[type="submit"]::after {
+    content: "";
+    width: 45px;
+    height: 40px;
+    background-image: url('/static/send.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: brightness(0) invert(1);
 }
 
-/* DIVIDER */
-hr{
-    border:none;
-    height:1px;
-    background:#2c2c2c;
-    margin:35px 0;
+/* ==========================================================================
+   3. DASHBOARD NOTES FEED CARDS (index.html)
+   ========================================================================== */
+.note-cointainer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-/* NOTES CONTAINER */
-.note-cointainer{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+.note-card {
+    background: #202020;
+    border: 1px solid #2f2f2f;
+    border-radius: 16px;
+    padding: 22px;
+    position: relative;
+    transition: all 0.2s ease;
 }
 
-/* NOTE CARD */
-.note-card{
-    background:#202020;
-    border:1px solid #2f2f2f;
-    border-radius:16px;
-    padding:22px;
-    position:relative;
-    transition:all 0.2s ease;
+.note-card:hover {
+    background: #252525;
+    border-color: #3d3d3d;
+    transform: translateY(-2px);
 }
 
-/* CARD HOVER */
-.note-card:hover{
-    background:#252525;
-    border-color:#3d3d3d;
-    transform:translateY(-2px);
+.note-card h2 {
+    font-size: 19px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding-right: 40px;
 }
 
-/* NOTE TITLE */
-.note-card h2{
-    font-size:19px;
-    font-weight:600;
-    color:#ffffff;
-    margin-bottom:10px;
-    padding-right:40px;
+.note-card p {
+    font-size: 14px;
+    color: #b5b5b5;
+    line-height: 1.8;
+    word-wrap: break-word;
 }
 
-/* NOTE CONTENT */
-.note-card p{
-    font-size:14px;
-    color:#b5b5b5;
-    line-height:1.8;
-    word-wrap:break-word;
+.note-date {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #7d7d7d;
 }
 
-/* NOTE DATE */
-.note-date{
-    margin-top:14px;
-    font-size:12px;
-    color:#7d7d7d;
+/* OPEN DETAILS BUTTON ON HOME CARD */
+.btn-open-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #2f80ff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-/* DELETE FORM */
-.note-card form{
-    position:absolute;
-    top:18px;
-    right:18px;
-    margin:0;
+.btn-open-link:hover {
+    text-decoration: underline;
 }
 
-/* DELETE BUTTON */
-.note-card button[type="submit"]{
-    width:20px;
-    height:20px;
-
-    background-color:transparent;
-    border:none;
-
-    background-image:url('/static/trash.png');
-    background-size:contain;
-    background-repeat:no-repeat;
-
-    cursor:pointer;
-    opacity:0.45;
-
-    text-indent:-9999px;
-    padding:0;
+/* DASHBOARD COMPACT DELETE POSITIONING */
+.note-card form {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    margin: 0;
 }
 
-/* REMOVE SEND ICON FROM DELETE BUTTON */
-.note-card button[type="submit"]::after{
-    display:none;
+.note-card button[type="submit"] {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    background-image: url('/static/trash.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    opacity: 0.45;
+    text-indent: -9999px;
+    padding: 0;
 }
 
-/* DELETE HOVER */
-.note-card button[type="submit"]:hover{
-    opacity:1;
-    transform:scale(1.1);
-    background-color:transparent;
+.note-card button[type="submit"]::after {
+    display: none; /* Removes the send icon inheritance */
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar{
-    width:8px;
+.note-card button[type="submit"]:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    background-color: transparent;
 }
 
-::-webkit-scrollbar-track{
-    background:#1a1a1a;
+/* ==========================================================================
+   4. DETAIL PAGE UNIQUE ELEMENTS (details.html)
+   ========================================================================== */
+
+/* BACK NAVIGATION LINK */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #2f80ff;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#3d3d3d;
-    border-radius:10px;
+.back-link:hover {
+    color: #1f6feb;
+    transform: translateX(-2px);
 }
 
-::-webkit-scrollbar-thumb:hover{
-    background:#4a4a4a;
+/* MASTER WRAPPER CARD ON DETAILS PAGE */
+.detail-card {
+    background: #202020;
+    border: 1px solid #2f2f2f;
+    border-radius: 16px;
+    padding: 35px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* MOBILE RESPONSIVE */
-@media(max-width:600px){
+/* SUCCESS TOASTS / STATUS NOTICES */
+.status-msg {
+    background: rgba(47, 128, 255, 0.1);
+    border: 1px solid rgba(47, 128, 255, 0.2);
+    color: #2f80ff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
 
-    body{
-        padding:25px 14px;
+.detail-card h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.detail-meta {
+    font-size: 13px;
+    color: #7d7d7d;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.detail-content-heading {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #7d7d7d;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* LARGE NOTE BODY PRESERVER CONTAINER */
+.detail-body {
+    font-size: 16px;
+    color: #e1e1e1;
+    line-height: 1.8;
+    background: #1a1a1a;
+    border: 1px solid #252525;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 150px;
+    white-space: pre-wrap; /* Crucial: preserves backend text formatting line breaks */
+    word-wrap: break-word;
+}
+
+/* LOWER ACTION STRIP CONTAINER */
+.detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+/* DEDICATED RED DETAIL DELETE BUTTON */
+.detail-actions form button[type="submit"] {
+    background: rgba(255, 69, 58, 0.1);
+    color: #ff453a;
+    border: 1px solid rgba(255, 69, 58, 0.2);
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.detail-actions form button[type="submit"]::after {
+    display: none; /* Removes the send icon inheritance */
+}
+
+.detail-actions form button[type="submit"]:hover {
+    background: #ff453a;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 69, 58, 0.2);
+}
+
+/* ==========================================================================
+   5. SYSTEM UTILITIES (Scrollbars & Responsiveness)
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3d3d3d;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4a4a4a;
+}
+
+@media(max-width: 600px) {
+    body {
+        padding: 25px 14px;
     }
 
-    h1{
-        font-size:32px;
+    h1 {
+        font-size: 32px;
     }
 
-    .note-card{
-        padding:18px;
+    .note-card, 
+    .detail-card {
+        padding: 18px;
     }
 
+    .detail-card h1 {
+        font-size: 26px;
+    }
+
+    .detail-body {
+        font-size: 15px;
+        padding: 15px;
+    }
 }

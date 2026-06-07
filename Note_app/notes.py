@@ -20,11 +20,20 @@ today = date.today()
 
 @app.get("/home", response_class=HTMLResponse)
 def home_page(request:Request):
-    cur.execute("SELECT *FROM  User_record")
-    notes = cur.fetchall()
     return templates.TemplateResponse(
         request=request,name="index.html",
-        context={"message":"Welcome to My Note App","notes":notes})
+        context={"message":"Welcome to My Note App"})
+
+# redirect user if they access details page without ID
+@app.get("/details")
+@app.get("/details/")
+def redirect_details():
+    cur.execute("SELECT * FROM User_record LIMIT 1")
+    note = cur.fetchone()
+    if not note:
+        return RedirectResponse("/home")
+    else:
+        return RedirectResponse(f"/details/{note[0]}")
 
 # getting name of user 
 @app.get("/details/{note_id}", response_class=HTMLResponse)
@@ -34,10 +43,12 @@ def user_detail(request:Request, note_id:int):
    if not note:
        return RedirectResponse("/home", status_code=303) 
    else:
-        return templates.TemplateResponse(
-        request=request,name="details.html",
-        context={"message":"Your Note added Successfully!", "note":note}
-    )
+       cur.execute("SELECT *FROM User_record")
+       notes = cur.fetchall()
+       return templates.TemplateResponse(
+           request=request,name="details.html",
+           context={"message":"Your Note added Successfully!", "note":note, "notes":notes}
+       )
        
 @app.post("/add", response_class=HTMLResponse)
 def add_notes(request:Request,Work_type:str=Form(),Content:str=Form()):
@@ -53,12 +64,8 @@ def add_notes(request:Request,Work_type:str=Form(),Content:str=Form()):
     values = (Work_type,Content,creation)
     cur.execute(query, values)
     conn.commit()
-    cur.execute("Select *from User_record") 
-    notes = cur.fetchall()
-
-    return templates.TemplateResponse(
-        request=request,name="index.html",
-        context={"message":"Note added Successfully!", "notes":notes})
+    new_id = cur.lastrowid
+    return RedirectResponse(f"/details/{new_id}", status_code=303)
 
 
 @app.post("/delete/{note_id}")
@@ -67,5 +74,5 @@ def delete_user(note_id:int):
     values = (note_id,)
     cur.execute(query, values)
     conn.commit()
-    return RedirectResponse("/home", status_code=303)
+    return RedirectResponse("/details", status_code=303)
 
