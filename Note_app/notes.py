@@ -27,30 +27,30 @@ def home_page(request:Request):
         context={"message":"Welcome to My Note App","notes":notes})
 
 # getting name of user 
-@app.post("/details/{note_id}", response_class=HTMLResponse)
+@app.get("/details/{note_id}", response_class=HTMLResponse)
 def user_detail(request:Request, note_id:int):
-   cur.execute("Select *from User_record where id=%s", (note_id))
+   cur.execute("Select *from User_record where id=%s", (note_id,))
    note = cur.fetchone()
    if not note:
        return RedirectResponse("/home", status_code=303) 
    else:
         return templates.TemplateResponse(
-        request=request,name="detail.html",
-        context={"message":"Your Note added Successfully!"}
+        request=request,name="details.html",
+        context={"message":"Your Note added Successfully!", "note":note}
     )
        
 @app.post("/add", response_class=HTMLResponse)
-def add_notes(request:Request,Work_type:str=Form(),Content:str=Form(), Creation_date:str=Form()):
+def add_notes(request:Request,Work_type:str=Form(),Content:str=Form()):
     Work_type=Work_type.title()
     creation = str(date.today())
     print(Work_type)
     print(Content)
-    print(Creation_date)
+    print(creation)
     query = """
     Insert into User_record(Work_type, Content, creation_date)
     values(%s,%s,%s)
     """
-    values = (Work_type,Content,Creation_date)
+    values = (Work_type,Content,creation)
     cur.execute(query, values)
     conn.commit()
     cur.execute("Select *from User_record") 
@@ -66,7 +66,6 @@ def delete_user(note_id:int):
     query = "DELETE FROM User_record where id=%s"
     values = (note_id,)
     cur.execute(query, values)
-    return RedirectResponse("/home", status_code=303)
     conn.commit()
-    cur.close()
+    return RedirectResponse("/home", status_code=303)
 

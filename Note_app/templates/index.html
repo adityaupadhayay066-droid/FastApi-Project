@@ -9,25 +9,35 @@
 <body>
     <div class="container">
         <h1>Welcome to my Note App</h1>
+        
         <form action="/add" method="post">
-            <input type="text" name="Work_type" placeholder="Eg-> Home Work" required>
-            <textarea name="Content" placeholder="Eg-> 2 program of C++" required></textarea>
+            <input type="text" name="Work_type" placeholder="Work Type (e.g., Home Work)" required>
+            <textarea name="Content" placeholder="Content (e.g., Complete math assignment)" required></textarea>
             <button type="submit">Click to add Note</button>
         </form>
+        
         <hr> 
+        
         <div class="note-cointainer">
-        {% for note in notes %}
-        <div class="note-card" >
-            <h2>{{note[1]}}</h2>
-            <p>{{note[2]}}</p>
-            <form action="/delete/{{note[0]}}" method="post">
-            <button type="submit">Delete</button>
-            </form>
+            {% for note in notes %}
+            <div class="note-card">
+                <h2>
+                    <a href="/details/{{note[0]}}" style="color: inherit; text-decoration: none;">
+                        {{note[1]}}
+                    </a>
+                </h2>
+                <p>{{note[2]}}</p>
+                
+                {% if note[3] %}
+                <div class="note-date">Created on: {{note[3]}}</div>
+                {% endif %}
+                
+                <form action="/delete/{{note[0]}}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
         </div>
-                {% endfor %}
-        </div>
-
     </div>
-    
 </body>
 </html>
