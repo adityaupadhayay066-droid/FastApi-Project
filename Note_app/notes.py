@@ -6,7 +6,7 @@ from database import cur,conn
 from fastapi.responses import RedirectResponse
 from datetime import date
 
-app = FastAPI()
+app = FastAPI(title="Note Api", description="Note adding api app")
 
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
