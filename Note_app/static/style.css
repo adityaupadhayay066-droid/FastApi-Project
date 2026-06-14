@@ -1,6 +1,14 @@
-/* ==========================================================================
-   1. GLOBAL RESET & BASE STYLES
-   ========================================================================== */
+:root {
+    --bg: #0b0d10;
+    --panel: rgba(255, 255, 255, 0.04);
+    --panel-2: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e8e8e8;
+    --muted: #9aa3b2;
+    --primary: #7c5cff;
+    --danger: #ff4d4d;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,369 +16,255 @@
 }
 
 body {
-    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #191919;
-    color: #ffffff;
+    font-family: Inter, system-ui, sans-serif;
+    background: radial-gradient(circle at top, #151a23, var(--bg));
+    color: var(--text);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 50px 20px;
+    padding: 40px 16px;
     line-height: 1.6;
 }
 
-/* MAIN CONTAINER (Used on both pages) */
 .container {
     width: 100%;
-    max-width: 720px;
+    max-width: 780px;
 }
 
-/* TYPOGRAPHY */
 h1 {
-    font-size: 42px;
+    font-size: 38px;
     font-weight: 700;
-    margin-bottom: 35px;
-    color: #ffffff;
-    letter-spacing: -1px;
+    letter-spacing: -0.8px;
+    margin-bottom: 24px;
 }
 
 hr {
     border: none;
     height: 1px;
-    background: #2c2c2c;
-    margin: 35px 0;
+    background: var(--border);
+    margin: 24px 0;
 }
 
-/* ==========================================================================
-   2. DASHBOARD FORM & INPUTS (index.html)
-   ========================================================================== */
 form {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
-input[type="text"],
-input[type="date"],
+input,
 textarea {
     width: 100%;
-    background: #202020;
-    border: 1px solid #2f2f2f;
-    color: #f5f5f5;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
     border-radius: 12px;
-    padding: 15px 16px;
-    font-size: 15px;
+    padding: 12px 14px;
+    font-size: 14px;
     outline: none;
-    transition: all 0.2s ease;
+    transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba(124, 92, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.15);
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: #7d7d7d;
+    color: var(--muted);
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-textarea:focus {
-    border-color: #2f80ff;
-    background: #252525;
-    box-shadow: 0 0 0 3px rgba(47, 128, 255, 0.15);
-}
-
-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-input[type="date"] {
-    cursor: pointer;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    opacity: 0.7;
-    cursor: pointer;
-}
-
-/* MAIN APP CREATION BUTTON */
 form button[type="submit"] {
-    background: #2f80ff;
-    color: white;
+    background: linear-gradient(135deg, #7c5cff, #5b8cff);
     border: none;
+    padding: 12px;
     border-radius: 12px;
-    padding: 14px;
-    font-size: 15px;
+    color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    transition: 0.2s ease;
 }
 
 form button[type="submit"]:hover {
-    background: #1f6feb;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
 }
 
-/* SEND ICON FOR CREATION BUTTON */
-form button[type="submit"]::after {
-    content: "";
-    width: 45px;
-    height: 40px;
-    background-image: url('/static/send.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: brightness(0) invert(1);
-}
-
-/* ==========================================================================
-   3. DASHBOARD NOTES FEED CARDS (index.html)
-   ========================================================================== */
 .note-cointainer {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
 }
 
 .note-card {
-    background: #202020;
-    border: 1px solid #2f2f2f;
-    border-radius: 16px;
-    padding: 22px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 16px;
+    border-radius: 14px;
+    transition: 0.2s ease;
     position: relative;
-    transition: all 0.2s ease;
 }
 
 .note-card:hover {
-    background: #252525;
-    border-color: #3d3d3d;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.01);
+    border-color: rgba(124, 92, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
 }
 
 .note-card h2 {
-    font-size: 19px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 10px;
-    padding-right: 40px;
+    font-size: 17px;
+    font-weight: 650;
+    margin-bottom: 6px;
 }
 
 .note-card p {
-    font-size: 14px;
-    color: #b5b5b5;
-    line-height: 1.8;
-    word-wrap: break-word;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
 }
 
 .note-date {
-    margin-top: 14px;
-    font-size: 12px;
-    color: #7d7d7d;
+    font-size: 11px;
+    color: #6f7682;
+    margin-top: 10px;
 }
 
-/* OPEN DETAILS BUTTON ON HOME CARD */
 .btn-open-link {
     display: inline-block;
-    margin-top: 15px;
-    color: #2f80ff;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--primary);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
 }
 
 .btn-open-link:hover {
     text-decoration: underline;
 }
 
-/* DASHBOARD COMPACT DELETE POSITIONING */
 .note-card form {
     position: absolute;
-    top: 18px;
-    right: 18px;
-    margin: 0;
+    top: 12px;
+    right: 12px;
 }
 
 .note-card button[type="submit"] {
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
+    width: 18px;
+    height: 18px;
     border: none;
-    background-image: url('/static/trash.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    background: url('/static/trash.png') center/contain no-repeat;
+    opacity: 0.4;
     cursor: pointer;
-    opacity: 0.45;
-    text-indent: -9999px;
-    padding: 0;
+    transition: 0.2s ease;
 }
 
-.note-card button[type="submit"]::after {
-    display: none; /* Removes the send icon inheritance */
-}
-
-.note-card button[type="submit"]:hover {
+.note-card button:hover {
     opacity: 1;
-    transform: scale(1.1);
-    background-color: transparent;
+    transform: scale(1.15);
 }
 
-/* ==========================================================================
-   4. DETAIL PAGE UNIQUE ELEMENTS (details.html)
-   ========================================================================== */
-
-/* BACK NAVIGATION LINK */
 .back-link {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #2f80ff;
+    gap: 6px;
+    color: var(--primary);
+    font-size: 14px;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 25px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    margin-bottom: 16px;
+    transition: 0.2s ease;
 }
 
 .back-link:hover {
-    color: #1f6feb;
-    transform: translateX(-2px);
+    transform: translateX(-3px);
 }
 
-/* MASTER WRAPPER CARD ON DETAILS PAGE */
 .detail-card {
-    background: #202020;
-    border: 1px solid #2f2f2f;
-    border-radius: 16px;
-    padding: 35px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-/* SUCCESS TOASTS / STATUS NOTICES */
-.status-msg {
-    background: rgba(47, 128, 255, 0.1);
-    border: 1px solid rgba(47, 128, 255, 0.2);
-    color: #2f80ff;
-    padding: 12px 16px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    font-size: 14px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    backdrop-filter: blur(12px);
 }
 
 .detail-card h1 {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 8px;
-    color: #ffffff;
-    letter-spacing: -0.5px;
+    font-size: 28px;
+    margin-bottom: 6px;
 }
 
 .detail-meta {
-    font-size: 13px;
-    color: #7d7d7d;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 18px;
 }
 
-.detail-content-heading {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #7d7d7d;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-/* LARGE NOTE BODY PRESERVER CONTAINER */
 .detail-body {
-    font-size: 16px;
-    color: #e1e1e1;
-    line-height: 1.8;
-    background: #1a1a1a;
-    border: 1px solid #252525;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    padding: 14px;
     border-radius: 12px;
-    padding: 20px;
-    min-height: 150px;
-    white-space: pre-wrap; /* Crucial: preserves backend text formatting line breaks */
-    word-wrap: break-word;
+    white-space: pre-wrap;
+    color: #d7d7d7;
+    line-height: 1.7;
 }
 
-/* LOWER ACTION STRIP CONTAINER */
 .detail-actions {
+    margin-top: 18px;
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
 }
 
-/* DEDICATED RED DETAIL DELETE BUTTON */
-.detail-actions form button[type="submit"] {
-    background: rgba(255, 69, 58, 0.1);
-    color: #ff453a;
-    border: 1px solid rgba(255, 69, 58, 0.2);
+.detail-actions button {
+    background: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.2);
+    color: var(--danger);
+    padding: 10px 16px;
     border-radius: 12px;
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: 0.2s ease;
 }
 
-.detail-actions form button[type="submit"]::after {
-    display: none; /* Removes the send icon inheritance */
-}
-
-.detail-actions form button[type="submit"]:hover {
-    background: #ff453a;
+.detail-actions button:hover {
+    background: var(--danger);
     color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 69, 58, 0.2);
+    transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   5. SYSTEM UTILITIES (Scrollbars & Responsiveness)
-   ========================================================================== */
 ::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1a1a1a;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3d3d3d;
+    background: #2c3240;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #4a4a4a;
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
     body {
-        padding: 25px 14px;
+        padding: 22px 12px;
     }
 
     h1 {
-        font-size: 32px;
+        font-size: 28px;
     }
 
-    .note-card, 
+    .note-card {
+        padding: 14px;
+    }
+
     .detail-card {
         padding: 18px;
-    }
-
-    .detail-card h1 {
-        font-size: 26px;
-    }
-
-    .detail-body {
-        font-size: 15px;
-        padding: 15px;
     }
 }
