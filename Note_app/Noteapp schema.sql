@@ -12,4 +12,3 @@ TRUNCATE User_record;
 DESC User_Record;
 Alter table User_record
 change  Creation  Creation_date DATE;
-drop database ai_tutor;
