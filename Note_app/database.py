@@ -15,15 +15,7 @@ cur = conn.cursor()
 cur.execute("CREATE DATABASE IF  NOT EXISTS Notes")
 cur.execute("USE Notes")
 
-# cur.execute("DROP TABLE IF  EXISTS User_record")
-# cur.execute(""" 
-#     CREATE TABLE user_record(
-#         id INT AUTO_INCREMENT PRIMARY KEY,
-#         Work_type VARCHAR(50),
-#         Content VARCHAR(200),
-#             Creation DATE
-#     )
-# """)
+
 cur.execute("SELECT * FROM User_record")
 data = cur.fetchall()
 print(data)
