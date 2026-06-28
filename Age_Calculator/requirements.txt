@@ -1,4 +1,0 @@
-﻿fastapi
-pydantic
-jinja2
-uvicorn
