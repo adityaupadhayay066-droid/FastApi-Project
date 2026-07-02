@@ -1,0 +1,5 @@
+Validator in Python 
+It is a extra check box that check a valid data is come from frontend side 
+
+syntax 
+@validator 
