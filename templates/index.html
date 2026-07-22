@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Note App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+       <h1>Notes Web-App</h1>
+       <p class="subtitle">Create and manage your notes efficiently.</p>
+        
+        <form action="/add" method="post">
+            <input type="text" name="Work_type" placeholder="Work Type (e.g., Home Work)" required>
+            <textarea name="Content" placeholder="Content (e.g., Complete math assignment)" required></textarea>
+            <button type="submit">Click to add Note</button>
+        </form>
+         <footer>
+            <p>Developed by Aditya Upadhayay</p>
+            <p>Builld with HTML, CSS,FastApi and MySQL</p>
+        </footer>
+        
+    </div>
+</body>
+</html>
